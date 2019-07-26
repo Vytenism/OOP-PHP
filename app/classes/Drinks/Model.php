@@ -9,9 +9,7 @@ class Model{
     /**
      * First call of event
      */
-    public function __construct(\Core\FileDB $db) {       
-        \App\App::$db = $db;
-        \App\App::$db->load();
+    public function __construct() {       
         \App\App::$db->createTable($this->table_name);
     }
     /**
