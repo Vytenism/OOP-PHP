@@ -2,6 +2,8 @@
 
 namespace App\Drinks;
 
+use \App\App;
+
 class Model{
     
     private $db;
@@ -10,7 +12,7 @@ class Model{
      * First call of event
      */
     public function __construct() {       
-        \App\App::$db->createTable($this->table_name);
+        App::$db->createTable($this->table_name);
     }
     /**
      * 
@@ -18,7 +20,7 @@ class Model{
      * @return type
      */
     public function insert(Drink $drink){      
-        return \App\App::$db->insertRow($this->table_name, $drink->getData());
+        return App::$db->insertRow($this->table_name, $drink->getData());
     }
     /**
      * Get array from DB under given conditions
@@ -27,7 +29,7 @@ class Model{
      */
     public function get($conditions = []){
         $drinks = [];
-        $rows = \App\App::$db->getRowsWhere($this->table_name, $conditions);
+        $rows = App::$db->getRowsWhere($this->table_name, $conditions);
         foreach ($rows as $row_id => $row_data){
             $row_data['id'] = $row_id;
             $drinks[] = new Drink($row_data);
@@ -40,7 +42,7 @@ class Model{
      * @return type
      */
     public function update(Drink $drink){
-        return \App\App::$db->updateRow($this->table_name, $drink->getId(), $drink->getData());
+        return App::$db->updateRow($this->table_name, $drink->getId(), $drink->getData());
     }
     /**
      * delete a row from DB
@@ -48,12 +50,12 @@ class Model{
      * @return type
      */
     public function delete(Drink $drink){
-        return \App\App::$db->deleteRow($this->table_name, $drink->getId());
+        return App::$db->deleteRow($this->table_name, $drink->getId());
     }
     /**
      * last call for this method
      */
         public function __destruct() {
-        \App\App::$db->save();
+        App::$db->save();
     }
 }
