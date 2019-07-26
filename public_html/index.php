@@ -8,8 +8,8 @@ $nav = [
         ['url' => '/', 'title' => 'Home'],
     ]
 ];
-$app = App\App::$db->getData();
-var_dump($app);
+$test = App\App::$db->getData();
+var_dump($test);
 ?>
 <html>
     <head>
