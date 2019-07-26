@@ -1,0 +1,1 @@
+{"drinks":[{"id":0,"name":"gira","amount_ml":1500,"abarot":0,"image":"png"}]}
