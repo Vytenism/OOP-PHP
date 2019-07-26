@@ -8,24 +8,8 @@ $nav = [
         ['url' => '/', 'title' => 'Home'],
     ]
 ];
-class Game {
-    public $score;
-    
-    public function __construct() {
-        $this->score = 0;
-    }
-}
-
-class Player {
-    public function __construct(Game $game) {
-        $game->score--;
-    }
-}
-$game = new Game();
-$player1 = new Player($game);
-$player2 = new Player($game);
-var_dump($game);
-
+$app = App\App::$db->getData();
+var_dump($app);
 ?>
 <html>
     <head>

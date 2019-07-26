@@ -17,3 +17,5 @@ require ROOT . '/core/functions/html/builder.php';
 
 // Load App Functions
 //...
+
+$app = new \App\App();
