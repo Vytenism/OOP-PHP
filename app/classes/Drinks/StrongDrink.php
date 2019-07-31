@@ -11,6 +11,9 @@ class StrongDrink extends Drink {
         //parent::setAmount(parent::getAmount() - 50);
     }
 
-    
+      public function setImage(string $image) {
+        parent::setImage($image);
+        return parent::getImage();
+    }
 
 }
