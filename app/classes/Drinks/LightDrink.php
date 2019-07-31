@@ -12,8 +12,12 @@ class LightDrink extends Drink {
         //parent::setAmount(parent::getAmount() - 100);
     }
     
-   public function getImage() {
-        return parent::getImage();
+    public function getImage() {
+        if (parent::getImage() == null) {
+            return 'https://www.pepsi.com/en-us/uploads/images/can-pepsi-cherry.png?mtime=20180110134748';
+        } else {
+            return parent::getImage();
+        }
     }
 
 }

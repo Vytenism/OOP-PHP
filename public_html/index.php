@@ -1,49 +1,46 @@
-<?php 
-
+<?php
 require '../bootloader.php';
 
 abstract class Car {
-    
+
     protected $manufacturer;
     protected $model;
     protected $year;
 
     abstract protected function drive();
-    
+
     public function __construct($manufacturer, $model, $year) {
         $this->manufacturer = $manufacturer;
         $this->model = $model;
         $this->year = $year;
     }
 
-
 }
 
-abstract class Honda extends Car{
-       
+abstract class Honda extends Car {
+
     protected $manufacturer = 'Honda';
-    
+
     public function __construct($model, $year) {
         parent::__construct('Honda', $model, $year);
     }
 
-} 
+}
 
-class HondaCivic extends Honda{
-    
+class HondaCivic extends Honda {
+
     public function __construct($year) {
         parent::__construct('Civic', $year);
     }
 
     public function drive() {
-       print 'Civicas juda'; 
+        print 'Civicas juda';
     }
 
 }
 
 //$honda = new HondaCivic(2001);
 //var_dump($honda);
-
 //$Whiskey = new \App\Drinks\StrongDrink([
 //                'name' => 'Whiskey',
 //                'amount_ml' => 700,
@@ -52,9 +49,11 @@ class HondaCivic extends Honda{
 //            ]);
 //$Whiskey->drink();
 //var_dump($Whiskey->getAmount());
-$image = 'https://morebeer-web-8-pavinthewaysoftw.netdna-ssl.com/product_image/morebeer/500x500/27498.png';
+//$image = 'https://morebeer-web-8-pavinthewaysoftw.netdna-ssl.com/product_image/morebeer/500x500/27498.png';
 $test = new \App\Drinks\LightDrink();
-$test->setImage($image);
+$test2 = new \App\Drinks\StrongDrink();
+$ab2 = $test2->getImage();
+//$test->setImage($image);
 $ab = $test->getImage();
 
 
@@ -66,8 +65,6 @@ $nav = [
         ['url' => 'logout.php', 'title' => 'Logout']
     ]
 ];
-
-
 ?>
 <html>
     <head>
@@ -81,13 +78,14 @@ $nav = [
         <script defer src="media/js/app.js"></script>
     </head>
     <body>
-<?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
+        <?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
 
         <div class="content">
-<?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
+            <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
         </div>
         <div>
             <img src="<?php print $ab; ?>" alt="">
+            <img src="<?php print $ab2; ?>" alt="">
         </div>
     </body>
 </html>

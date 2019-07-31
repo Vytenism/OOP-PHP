@@ -11,9 +11,12 @@ class StrongDrink extends Drink {
         //parent::setAmount(parent::getAmount() - 50);
     }
 
-      public function setImage(string $image) {
-        parent::setImage($image);
-        return parent::getImage();
+    public function getImage() {
+        if (parent::getImage() == null) {
+            return 'https://products3.imgix.drizly.com/ci-jack-daniels-old-no-7-92707d5e737cf4ac.jpeg?auto=format%2Ccompress&dpr=2&fm=jpeg&h=240&q=20';
+        } else {
+            return parent::getImage();
+        }
     }
 
 }
