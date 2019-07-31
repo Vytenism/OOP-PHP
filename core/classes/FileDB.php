@@ -1,12 +1,18 @@
 <?php
+
 namespace Core;
+
 class FileDB {
+
     private $file_name;
+
     /** @var array $data */
     private $data;
+
     public function __construct($file_name) {
         $this->file_name = $file_name;
     }
+
     /**
      * Loads all data from file to $data
      */
@@ -18,6 +24,7 @@ class FileDB {
             }
         }
     }
+
     /**
      * Saves all data to file
      * @return boolean
@@ -26,6 +33,7 @@ class FileDB {
         $string = json_encode($this->data);
         return file_put_contents($this->file_name, $string);
     }
+
     /**
      * Gets all database data as array
      * @return type
@@ -36,6 +44,7 @@ class FileDB {
         }
         return $this->data;
     }
+
     /**
      * Sets all data from an array
      * @param type $data
@@ -43,6 +52,7 @@ class FileDB {
     public function setData(array $data) {
         $this->data = $data;
     }
+
     /**
      * Checks if table exists
      * @param string $table_name
@@ -54,6 +64,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Creates a table
      * @param string $table_name
@@ -66,6 +77,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Deletes table from database
      * @param string $table_name
@@ -75,6 +87,7 @@ class FileDB {
         unset($this->data[$table_name]);
         return true;
     }
+
     /**
      * Deletes all table content
      * @param string $table_name
@@ -87,6 +100,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Inserts row to table
      * @param string $table
@@ -105,6 +119,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Checks if row exists in table
      * @param string $table
@@ -117,6 +132,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Updates row content in a given row_id
      * @param string $table
@@ -131,6 +147,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Creates a row if it doesn't exist in table
      * @param string $table
@@ -144,6 +161,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Deletes row from table
      * @param string $table
@@ -157,6 +175,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Gets content from row
      * @param string $table
@@ -169,6 +188,7 @@ class FileDB {
         }
         return false;
     }
+
     /**
      * Gets content from row where conditions exist
      * @param string $table
@@ -191,7 +211,9 @@ class FileDB {
         }
         return $rows;
     }
+
     public function __destruct() {
         $this->save();
     }
+
 }

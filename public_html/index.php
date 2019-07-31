@@ -56,13 +56,13 @@ $ab2 = $test2->getImage();
 //$test->setImage($image);
 $ab = $test->getImage();
 
-
 $nav = [
     'left' => [
         ['url' => 'index.php', 'title' => 'Home'],
         ['url' => 'register.php', 'title' => 'Register'],
         ['url' => 'login.php', 'title' => 'Login'],
-        ['url' => 'logout.php', 'title' => 'Logout']
+        ['url' => 'logout.php', 'title' => 'Logout'],
+        ['url' => 'drinks.php', 'title' => 'Drinks']
     ]
 ];
 ?>

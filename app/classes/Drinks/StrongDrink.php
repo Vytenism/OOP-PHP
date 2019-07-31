@@ -12,11 +12,16 @@ class StrongDrink extends Drink {
     }
 
     public function getImage() {
-        if (parent::getImage() == null) {
-            return 'https://products3.imgix.drizly.com/ci-jack-daniels-old-no-7-92707d5e737cf4ac.jpeg?auto=format%2Ccompress&dpr=2&fm=jpeg&h=240&q=20';
-        } else {
+        // pirmas budas
+        if (parent::getImage()) {
             return parent::getImage();
+        } else {
+            return 'https://www.pepsi.com/en-us/uploads/images/can-pepsi-cherry.png?mtime=20180110134748';
         }
+        // antras budas
+//        return parent::getImage() ?? 'https://www.pepsi.com/en-us/uploads/images/can-pepsi-cherry.png?mtime=20180110134748';
+        // trecias budas
+//        return parent::getImage() ? parent::getImage() : 'https://www.pepsi.com/en-us/uploads/images/can-pepsi-cherry.png?mtime=20180110134748';
     }
-
+    
 }
