@@ -54,7 +54,7 @@ class HondaCivic extends Honda{
 //var_dump($Whiskey->getAmount());
 $image = 'https://morebeer-web-8-pavinthewaysoftw.netdna-ssl.com/product_image/morebeer/500x500/27498.png';
 $test = new \App\Drinks\LightDrink();
-$ab =$test->override($image);
+$ab =$test->setImage($image);
 
 
 $nav = [

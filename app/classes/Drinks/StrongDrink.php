@@ -11,9 +11,6 @@ class StrongDrink extends Drink {
         //parent::setAmount(parent::getAmount() - 50);
     }
 
-    public function override($image) {
-        $this->setImage($image);
-        return $this->getImage();
-    }
+    
 
 }
