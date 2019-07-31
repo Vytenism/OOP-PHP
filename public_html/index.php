@@ -44,14 +44,17 @@ class HondaCivic extends Honda{
 //$honda = new HondaCivic(2001);
 //var_dump($honda);
 
-$Whiskey = new \App\Drinks\StrongDrink([
-                'name' => 'Whiskey',
-                'amount_ml' => 700,
-                'abarot' => 40,
-                'image' => '.png'
-            ]);
-$Whiskey->drink();
-var_dump($Whiskey->getAmount());
+//$Whiskey = new \App\Drinks\StrongDrink([
+//                'name' => 'Whiskey',
+//                'amount_ml' => 700,
+//                'abarot' => 40,
+//                'image' => '.png'
+//            ]);
+//$Whiskey->drink();
+//var_dump($Whiskey->getAmount());
+$image = 'https://morebeer-web-8-pavinthewaysoftw.netdna-ssl.com/product_image/morebeer/500x500/27498.png';
+$test = new \App\Drinks\LightDrink();
+$ab =$test->override($image);
 
 
 $nav = [
@@ -82,6 +85,8 @@ $nav = [
         <div class="content">
 <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
         </div>
-
+        <div>
+            <img src="<?php print $ab; ?>" alt="">
+        </div>
     </body>
 </html>

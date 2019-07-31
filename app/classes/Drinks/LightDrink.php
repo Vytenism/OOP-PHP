@@ -9,8 +9,14 @@ class LightDrink extends Drink {
         // su $this
         $this->setAmount($this->getAmount() - 100); 
         // su parent::
-        //parent::setAmount(parent::getAmount() - 50);
+        //parent::setAmount(parent::getAmount() - 100);
     }
+    
+    public function override($image) {
+        $this->setImage($image);
+        return $this->getImage();
+    }
+
 }
 
 
