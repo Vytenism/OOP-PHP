@@ -12,8 +12,7 @@ class LightDrink extends Drink {
         //parent::setAmount(parent::getAmount() - 100);
     }
     
-    public function setImage(string $image) {
-        parent::setImage($image);
+   public function getImage() {
         return parent::getImage();
     }
 
