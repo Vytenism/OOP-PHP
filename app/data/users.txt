@@ -1,1 +1,1 @@
-{"drinks":[{"id":0,"name":"gira","amount_ml":1500,"abarot":0,"image":"png"}]}
+{"users":[{"name":"vytenis2","last":"merkys&#62;&#60;?","email":"aparance@gmail.com","password":"123456"},{"name":"vytenis","last":"merkys&#62;&#60;?","email":"aparance@gmail.com","password":"123456"},{"name":"vytenis","last":"merkys&#62;&#60;?","email":"aparance2@gmail.com","password":"12345"},{"name":"vytenis","last":"merkys&#62;&#60;?","email":"aparance3@gmail.com","password":"12345"},{"name":"vytenis","last":"merkys&#62;&#60;?","email":"aparance4@gmail.com","password":"12345"}]}

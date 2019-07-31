@@ -1,23 +1,31 @@
 <?php
+
 namespace Core;
+
 class FileDB {
+
     private $file_name;
-    /** @var array $data */
+    
+    /** @var array $data */ 
     private $data;
+
     public function __construct($file_name) {
         $this->file_name = $file_name;
     }
+
     /**
      * Loads all data from file to $data
      */
     public function load() {
         if (file_exists($this->file_name)) {
             $encoded_string = file_get_contents($this->file_name);
+
             if ($encoded_string !== false) {
                 $this->data = json_decode($encoded_string, true);
             }
         }
     }
+
     /**
      * Saves all data to file
      * @return boolean
@@ -26,6 +34,7 @@ class FileDB {
         $string = json_encode($this->data);
         return file_put_contents($this->file_name, $string);
     }
+
     /**
      * Gets all database data as array
      * @return type
@@ -34,8 +43,10 @@ class FileDB {
         if ($this->data == null) {
             $this->load();
         }
+
         return $this->data;
     }
+
     /**
      * Sets all data from an array
      * @param type $data
@@ -43,6 +54,7 @@ class FileDB {
     public function setData(array $data) {
         $this->data = $data;
     }
+
     /**
      * Checks if table exists
      * @param string $table_name
@@ -52,8 +64,10 @@ class FileDB {
         if (isset($this->data[$table_name])) {
             return true;
         }
+
         return false;
     }
+
     /**
      * Creates a table
      * @param string $table_name
@@ -64,8 +78,10 @@ class FileDB {
             $this->data[$table_name] = [];
             return true;
         }
+
         return false;
     }
+
     /**
      * Deletes table from database
      * @param string $table_name
@@ -73,8 +89,10 @@ class FileDB {
      */
     public function dropTable($table_name) {
         unset($this->data[$table_name]);
+
         return true;
     }
+
     /**
      * Deletes all table content
      * @param string $table_name
@@ -85,8 +103,10 @@ class FileDB {
             $this->data[$table_name] = [];
             return true;
         }
+
         return false;
     }
+
     /**
      * Inserts row to table
      * @param string $table
@@ -94,29 +114,34 @@ class FileDB {
      * @param string|integer $row_id
      * @return boolean
      */
-    public function insertRow($table, $row, $row_id = null) {
-        if ($this->tableExists($table)) {
+    public function insertRow($table_name, $row, $row_id = null) {
+        if ($this->tableExists($table_name)) {
             if ($row_id) {
-                $this->data[$table][$row_id] = $row;
+                $this->data[$table_name][$row_id] = $row;
             } else {
-                $this->data[$table][] = $row;
+                $this->data[$table_name][] = $row;
             }
+
             return true;
         }
+
         return false;
     }
+
     /**
      * Checks if row exists in table
      * @param string $table
      * @param mixed $row_id
      * @return boolean
      */
-    public function rowExists($table, $row_id) {
-        if (isset($this->data[$table][$row_id])) {
+    public function rowExists($table_name, $row_id) {
+        if (isset($this->data[$table_name][$row_id])) {
             return true;
         }
+
         return false;
     }
+
     /**
      * Updates row content in a given row_id
      * @param string $table
@@ -124,13 +149,15 @@ class FileDB {
      * @param array $row
      * @return boolean
      */
-    public function updateRow($table, $row_id, $row) {
-        if ($this->rowExists($table, $row_id)) {
-            $this->data[$table][$row_id] = $row;
+    public function updateRow($table_name, $row_id, $row) {
+        if ($this->rowExists($table_name, $row_id)) {
+            $this->data[$table_name][$row_id] = $row;
             return true;
         }
+
         return false;
     }
+
     /**
      * Creates a row if it doesn't exist in table
      * @param string $table
@@ -138,46 +165,52 @@ class FileDB {
      * @param array $row
      * @return boolean
      */
-    public function rowInsertIfNotExists($table, $row_id, $row) {
-        if (!$this->rowExists($table, $row_id)) {
-            return $this->insertRow($table, $row, $row_id); // insertRow function returns boolean
+    public function rowInsertIfNotExists($table_name, $row_id, $row) {
+        if (!$this->rowExists($table_name, $row_id)) {
+            return $this->insertRow($table_name, $row, $row_id); // insertRow function returns boolean
         }
+
         return false;
     }
+
     /**
      * Deletes row from table
      * @param string $table
      * @param string|number $row_id
      * @return boolean
      */
-    public function deleteRow($table, $row_id) {
-        if ($this->rowExists($table, $row_id)) {
-            unset($this->data[$table][$row_id]);
+    public function deleteRow($table_name, $row_id) {
+        if ($this->rowExists($table_name, $row_id)) {
+            unset($this->data[$table_name][$row_id]);
             return true;
         }
+
         return false;
     }
+
     /**
      * Gets content from row
      * @param string $table
      * @param string|number $row_id
      * @return boolean
      */
-    public function getRow($table, $row_id) {
-        if ($this->rowExists($table, $row_id)) {
-            return $this->data[$table][$row_id];
+    public function getRow($table_name, $row_id) {
+        if ($this->rowExists($table_name, $row_id)) {
+            return $this->data[$table_name][$row_id];
         }
+
         return false;
     }
+
     /**
      * Gets content from row where conditions exist
      * @param string $table
      * @param array $conditions
      * @return array
      */
-    public function getRowsWhere($table, $conditions) {
+    public function getRowsWhere($table_name, $conditions) {
         $rows = [];
-        foreach ($this->data[$table] as $row_id => $row) {
+        foreach ($this->data[$table_name] as $row_id => $row) {
             $condition_met = true;
             foreach ($conditions as $condition_id => $condition) {
                 if ($row[$condition_id] !== $condition) {
@@ -185,12 +218,15 @@ class FileDB {
                     break;
                 }
             }
+
             if ($condition_met) {
                 $rows[$row_id] = $row;
             }
         }
+
         return $rows;
     }
+    
     public function __destruct() {
         $this->save();
     }

@@ -1,15 +1,69 @@
-<?php
+<?php 
+
 require '../bootloader.php';
 
-use App\Drinks\Drink;
+abstract class Car {
+    
+    protected $manufacturer;
+    protected $model;
+    protected $year;
+
+    abstract protected function drive();
+    
+    public function __construct($manufacturer, $model, $year) {
+        $this->manufacturer = $manufacturer;
+        $this->model = $model;
+        $this->year = $year;
+    }
+
+
+}
+
+abstract class Honda extends Car{
+       
+    protected $manufacturer = 'Honda';
+    
+    public function __construct($model, $year) {
+        parent::__construct('Honda', $model, $year);
+    }
+
+} 
+
+class HondaCivic extends Honda{
+    
+    public function __construct($year) {
+        parent::__construct('Civic', $year);
+    }
+
+    public function drive() {
+       print 'Civicas juda'; 
+    }
+
+}
+
+//$honda = new HondaCivic(2001);
+//var_dump($honda);
+
+$Whiskey = new \App\Drinks\StrongDrink([
+                'name' => 'Whiskey',
+                'amount_ml' => 700,
+                'abarot' => 40,
+                'image' => '.png'
+            ]);
+$Whiskey->drink();
+var_dump($Whiskey->getAmount());
+
 
 $nav = [
     'left' => [
-        ['url' => '/', 'title' => 'Home'],
+        ['url' => 'index.php', 'title' => 'Home'],
+        ['url' => 'register.php', 'title' => 'Register'],
+        ['url' => 'login.php', 'title' => 'Login'],
+        ['url' => 'logout.php', 'title' => 'Logout']
     ]
 ];
-$test = App\App::$db->getData();
-var_dump($test);
+
+
 ?>
 <html>
     <head>
