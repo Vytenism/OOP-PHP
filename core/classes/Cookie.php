@@ -22,12 +22,17 @@ class Cookie extends Abstracts\Cookie {
     }
 
     public function read(): array {
-        $decoded = json_decode($_COOKIE[$this->name]);
-        if ($decoded === NULL) {
-            trigger_error('Not succeeded to decode!', E_USER_WARNING);
-            $decoded = [];
-            return $decoded;
+        if ($this->exists()) {
+            $decoded = json_decode($_COOKIE[$this->name]);
+            if ($decoded === NULL) {
+                trigger_error('Not succeeded to decode!', E_USER_WARNING);
+                $decoded = [];
+                return $decoded;
+            } else {
+                return $decoded;
+            }
         } else {
+            $decoded = [];
             return $decoded;
         }
     }
