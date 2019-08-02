@@ -14,7 +14,7 @@ class Cookie extends Abstracts\Cookie {
     }
 
     public function exists(): bool {
-        if ($_COOKIE) {
+        if (isset($_COOKIE[$this->name])) {
             return true;
         }
         
