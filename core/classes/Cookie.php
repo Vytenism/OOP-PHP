@@ -14,13 +14,11 @@ class Cookie extends Abstracts\Cookie {
     }
 
     public function exists(): bool {
-        if (file_exists($this->name)) {
-            $encoded_string = file_get_contents($this->file_name);
-
-            if ($encoded_string !== false) {
-                $this->data = json_decode($encoded_string, true);
-            }
+        if ($_COOKIE) {
+            return true;
         }
+        
+        return false;
     }
 
     public function read(): array {

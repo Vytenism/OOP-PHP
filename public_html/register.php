@@ -67,7 +67,7 @@ $form = [
         ]
     ]
 ];
-
+var_dump($_COOKIE);
 function form_success($filtered_input, &$form) {
     $newUser = new App\Users\User($filtered_input);
     $modelUsers = new App\Users\Model();
