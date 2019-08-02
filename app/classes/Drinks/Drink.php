@@ -117,6 +117,7 @@ class Drink {
     public function getImage() {
         return $this->data['image'];
     }
+    
     /**
      * 
      * @param int $id
@@ -124,12 +125,13 @@ class Drink {
     public function setId(int $id){
         $this->data['id'] = $id;
     }
+    
     /**
      * 
-     * @return mixed
+     * @return mi
      */
     public function getId(){
         return $this->data['id'];
     }
-}
 
+}

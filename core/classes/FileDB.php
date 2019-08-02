@@ -19,6 +19,7 @@ class FileDB {
     public function load() {
         if (file_exists($this->file_name)) {
             $encoded_string = file_get_contents($this->file_name);
+
             if ($encoded_string !== false) {
                 $this->data = json_decode($encoded_string, true);
             }
@@ -42,6 +43,7 @@ class FileDB {
         if ($this->data == null) {
             $this->load();
         }
+
         return $this->data;
     }
 
@@ -62,6 +64,7 @@ class FileDB {
         if (isset($this->data[$table_name])) {
             return true;
         }
+
         return false;
     }
 
@@ -75,6 +78,7 @@ class FileDB {
             $this->data[$table_name] = [];
             return true;
         }
+
         return false;
     }
 
@@ -85,6 +89,7 @@ class FileDB {
      */
     public function dropTable($table_name) {
         unset($this->data[$table_name]);
+
         return true;
     }
 
@@ -98,6 +103,7 @@ class FileDB {
             $this->data[$table_name] = [];
             return true;
         }
+
         return false;
     }
 
@@ -115,8 +121,10 @@ class FileDB {
             } else {
                 $this->data[$table][] = $row;
             }
+
             return true;
         }
+
         return false;
     }
 
@@ -130,6 +138,7 @@ class FileDB {
         if (isset($this->data[$table][$row_id])) {
             return true;
         }
+
         return false;
     }
 
@@ -145,6 +154,7 @@ class FileDB {
             $this->data[$table][$row_id] = $row;
             return true;
         }
+
         return false;
     }
 
@@ -159,6 +169,7 @@ class FileDB {
         if (!$this->rowExists($table, $row_id)) {
             return $this->insertRow($table, $row, $row_id); // insertRow function returns boolean
         }
+
         return false;
     }
 
@@ -173,6 +184,7 @@ class FileDB {
             unset($this->data[$table][$row_id]);
             return true;
         }
+
         return false;
     }
 
@@ -186,6 +198,7 @@ class FileDB {
         if ($this->rowExists($table, $row_id)) {
             return $this->data[$table][$row_id];
         }
+
         return false;
     }
 
@@ -200,11 +213,17 @@ class FileDB {
         foreach ($this->data[$table] as $row_id => $row) {
             $condition_met = true;
             foreach ($conditions as $condition_id => $condition) {
-                if ($row[$condition_id] !== $condition) {
+                if ($condition_id === 'row_id') {
+                    if ($row_id != $condition) {
+                        $condition_met = false;
+                        break;
+                    }
+                } else if ($row[$condition_id] !== $condition) {
                     $condition_met = false;
                     break;
                 }
             }
+
             if ($condition_met) {
                 $rows[$row_id] = $row;
             }

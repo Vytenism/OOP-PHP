@@ -1,61 +1,61 @@
-<?php 
-
+<?php
 namespace App\Drinks;
-
 use \App\App;
-
-class Model{
-    
-    private $db;
+class Model
+{
     private $table_name = 'drinks';
-    /**
-     * First call of event
-     */
-    public function __construct() {       
+    public function __construct()
+    {
         App::$db->createTable($this->table_name);
     }
-    /**
-     * 
-     * @param \App\Drinks\Drink $drink
-     * @return type
+    /** 2uzd turi irasyti $drink i duombaze
+     * @param Drink $drink
      */
-    public function insert(Drink $drink){      
+    public function insert(Drink $drink)
+    {
         return App::$db->insertRow($this->table_name, $drink->getData());
     }
     /**
-     * Get array from DB under given conditions
-     * @param type $conditions
-     * @return type
+     * 3uzd
+     * @param array $conditions
+     * @return Drink[]
      */
-    public function get($conditions = []){
+    public function get($conditions = [])
+    {
         $drinks = [];
         $rows = App::$db->getRowsWhere($this->table_name, $conditions);
-        foreach ($rows as $row_id => $row_data){
+        foreach ($rows as $row_id => $row_data) {
             $row_data['id'] = $row_id;
-            $drinks[] = new Drink($row_data);
+//            $drinks[] = new Drink($row_data);
+            if ($row_data['abarot'] < 30){
+              $drinks[] = new LightDrink($row_data); 
+            }else{
+              $drinks[] = new StrongDrink($row_data);  
+            }
         }
         return $drinks;
     }
     /**
-     * updates a row in DB
-     * @param \App\Drinks\Drink $drink
-     * @return type
+     * 4uzd
+     * @param Drink $drink
+     * @return bool
      */
-    public function update(Drink $drink){
+    public function update(Drink $drink)
+    {
         return App::$db->updateRow($this->table_name, $drink->getId(), $drink->getData());
     }
     /**
-     * delete a row from DB
-     * @param \App\Drinks\Drink $drink
-     * @return type
+     * 5uzd
+     * @param Drink $drink
+     * @return bool
      */
-    public function delete(Drink $drink){
+    public function delete(Drink $drink)
+    {
         return App::$db->deleteRow($this->table_name, $drink->getId());
     }
-    /**
-     * last call for this method
-     */
-        public function __destruct() {
+    public function __destruct()
+    {
         App::$db->save();
     }
 }
+?>
