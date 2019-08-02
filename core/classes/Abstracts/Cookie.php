@@ -1,4 +1,3 @@
-
 <?php
 ​
 namespace Core\Abstracts;
@@ -65,4 +64,3 @@ abstract class Cookie {
     abstract public function delete(): void;
     
 }
-​

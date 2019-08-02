@@ -12,7 +12,7 @@ class Cookie extends Abstracts\Cookie {
         $this->name = $name;
     }
     /**
-     * 
+     * Delete Cookie
      * @return void
      */
     public function delete(): void {
@@ -21,7 +21,7 @@ class Cookie extends Abstracts\Cookie {
         return true;
     }
     /**
-     * 
+     * Check if Cookie with that name exists
      * @return bool
      */
     public function exists(): bool {
@@ -32,7 +32,8 @@ class Cookie extends Abstracts\Cookie {
         return false;
     }
     /**
-     * 
+     * If cookie exists he returns decoded array
+     * Else trigger warning and returns empty array
      * @return array
      */
     public function read(): array {
@@ -46,7 +47,7 @@ class Cookie extends Abstracts\Cookie {
         return [];
     }
     /**
-     * 
+     * Save data array in to cookie
      * @param type $data
      * @param type $expires_in
      */
