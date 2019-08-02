@@ -10,7 +10,9 @@ class Cookie extends Abstracts\Cookie {
     }
 
     public function delete(): void {
-        
+        unset($_COOKIE[$this->name]);
+        setcookie($this->name, -1);
+        return true;
     }
 
     public function exists(): bool {
@@ -24,21 +26,17 @@ class Cookie extends Abstracts\Cookie {
     public function read(): array {
         if ($this->exists()) {
             $decoded = json_decode($_COOKIE[$this->name]);
-            if ($decoded === NULL) {
-                trigger_error('Not succeeded to decode!', E_USER_WARNING);
-                $decoded = [];
-                return $decoded;
-            } else {
+            if ($decoded) {
                 return $decoded;
             }
-        } else {
-            $decoded = [];
-            return $decoded;
+            trigger_error('Not succeeded to decode!', E_USER_WARNING);
         }
+        return [];
     }
 
     public function save($data, $expires_in = 3600): void {
-        
+        $encoded = json_encode($data);
+        setcookie($this->name, $encoded, $expires_in);
     }
 
 }
